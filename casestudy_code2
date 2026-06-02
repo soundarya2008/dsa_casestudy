@@ -1,0 +1,40 @@
+import java.util.*;
+public class MediaVaultBPlus {
+    static ArrayList<Integer> mediaIDs = new ArrayList<>();
+    // INSERT MEDIA-ID
+    static void insert(int id) {
+        mediaIDs.add(id);
+        Collections.sort(mediaIDs);
+    }
+    // SEARCH MEDIA-ID
+    static boolean search(int id) {
+        return mediaIDs.contains(id);
+    }
+    // RANGE QUERY
+    static void rangeQuery(int start, int end) {
+        System.out.println("Media IDs in Range:");
+        for (int id : mediaIDs) {
+            if (id >= start && id <= end) {
+                System.out.print(id + " ");
+            }
+        }
+    }
+    public static void main(String[] args) {
+        int[] ids = {
+            1001, 1020, 1050, 1100,
+            1200, 1300, 1400
+        };
+        for (int id : ids) {
+            insert(id);
+        }
+        System.out.println("All Media IDs:");
+        System.out.println(mediaIDs);
+        int searchID = 1100;
+        System.out.println("\nSearching for: " + searchID);
+        if (search(searchID))
+            System.out.println("Media File Found");
+        else
+            System.out.println("Media File Not Found");
+        System.out.println("\nRange Query (1000 - 1200):");
+        rangeQuery(1000, 1200);
+    }}
