@@ -1,0 +1,68 @@
+import java.util.*;
+
+public class BucketSort {
+
+    public static void bucketSort(int[] arr) {
+
+        ArrayList<Integer>[] buckets = new ArrayList[10];
+
+        for (int i = 0; i < 10; i++) {
+            buckets[i] = new ArrayList<>();
+        }
+
+        // Distribute elements into buckets
+        for (int num : arr) {
+            int bucketIndex = num / 10;
+            buckets[bucketIndex].add(num);
+        }
+
+        System.out.println("Bucket Distribution");
+
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Bucket " + i + " (" + (i * 10) + "-" + (i * 10 + 9) + "): ");
+
+            if (buckets[i].isEmpty()) {
+                System.out.println("Empty");
+            } else {
+                for (int num : buckets[i]) {
+                    System.out.print(num + " ");
+                }
+                System.out.println();
+            }
+        }
+
+        // Sort each bucket
+        for (int i = 0; i < 10; i++) {
+            Collections.sort(buckets[i]);
+        }
+
+        // Merge buckets
+        int index = 0;
+
+        for (int i = 0; i < 10; i++) {
+            for (int num : buckets[i]) {
+                arr[index++] = num;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        int[] arr = {37, 12, 78, 25, 91, 4, 56, 8, 33, 67, 19, 45};
+
+        System.out.println("Input:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+
+        System.out.println("\n");
+
+        bucketSort(arr);
+
+        System.out.println("\nSorted Output");
+
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
